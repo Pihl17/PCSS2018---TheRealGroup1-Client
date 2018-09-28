@@ -2,7 +2,7 @@
 How to upload to git:
 
 first clone the directory:
-git clone https://github.com/DefaultV/PCSS2018---TheRealGroup1.git<br/>
+git clone https://github.com/Pihl17/PCSS2018---TheRealGroup1-Client.git
 
 then when you have added some files do a:<br/>
 git status<br/>
