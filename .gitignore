@@ -12,5 +12,6 @@
 *.tar.gz
 *.rar
 *.swp
+~
 hs_err_pid*
 /bin/
