@@ -1,7 +1,7 @@
 public class Player {
 	
 	String userId;
-	String nickname;
+	String nickName;
 	
 	
 	
@@ -10,12 +10,12 @@ public class Player {
 	}
 	
 	public String GetNickName() {
-		return nickname;
+		return nickName;
 		
 	}
 	
-	public void SetNickName(String nickname) {
-		
+	public void SetNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 }
