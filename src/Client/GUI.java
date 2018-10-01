@@ -30,4 +30,11 @@ public class GUI {
 		chatPanel.revalidate();
 		chatPanel.updateUI();
 	}
+
+	public static void AddToChat(String s) {
+		JLabel label = new JLabel(s);
+		chatPanel.add(label);
+		chatPanel.revalidate();
+		chatPanel.updateUI();
+	}
 }
