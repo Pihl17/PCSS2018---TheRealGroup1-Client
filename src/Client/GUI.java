@@ -22,3 +22,16 @@ public class GUI {
 		frame.setVisible(true);
 	}
 }
+
+
+public void ConnectToSever() {
+
+}
+
+public void DisplayLobby(List <Player>) {
+	
+}
+
+public void DisplayMap(<List <Player>) {
+	
+}
