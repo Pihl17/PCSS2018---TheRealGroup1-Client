@@ -19,5 +19,4 @@ public class Player {
 	public void SetNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	
 }

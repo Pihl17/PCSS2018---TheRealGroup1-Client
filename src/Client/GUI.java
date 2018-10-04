@@ -1,7 +1,9 @@
 package Client;
-
 import java.awt.GridLayout;
 import javax.swing.JPanel;
+
+import javafx.scene.layout.Pane;
+
 import javax.swing.JLabel;
 import javax.swing.JFrame;
 
@@ -21,4 +23,7 @@ public class GUI {
 		frame.pack();
 		frame.setVisible(true);
 	}
+ 
+	
 }
+
