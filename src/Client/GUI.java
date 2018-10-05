@@ -1,7 +1,9 @@
 package Client;
-
 import java.awt.GridLayout;
 import javax.swing.JPanel;
+
+import javafx.scene.layout.Pane;
+
 import javax.swing.JLabel;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
@@ -20,7 +22,7 @@ public class GUI {
 		frame.setSize(500, 200);
 		frame.setVisible(true);
 	}
-
+  
 	public static void UpdateChat(String... chatLog) {
 		chatPanel.removeAll();
 		for (String string : chatLog) {
@@ -38,3 +40,4 @@ public class GUI {
 		chatPanel.updateUI();
 	}
 }
+
