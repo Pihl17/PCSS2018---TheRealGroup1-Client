@@ -1,11 +1,14 @@
 package Client;
 
+import java.util.concurrent.Executor;
 
-public class Main extends Grid {
+public class Main {
 
 	public static void main(String[] args) {
 
-	Grid.launch(args); 
+	new Thread(new UIThread()).start();
+	
+	
 
 	}
 
