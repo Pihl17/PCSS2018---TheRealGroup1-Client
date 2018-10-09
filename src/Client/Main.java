@@ -1,15 +1,17 @@
 package Client;
 
-public class Main extends Grid {
+import java.util.concurrent.Executor;
+
+public class Main {
 
 	public static void main(String[] args) {
 
-	GUI.DisplayChat();
-		
-	Grid.launch(args); 
-		    
+	new Thread(new UIThread()).start();
+	
+	
 
 	}
 
-
 }
+
+

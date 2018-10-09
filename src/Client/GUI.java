@@ -1,43 +1,42 @@
 package Client;
-import java.awt.GridLayout;
-import javax.swing.JPanel;
 
-import javafx.scene.layout.Pane;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
 
-import javax.swing.JLabel;
-import javax.swing.JFrame;
-import javax.swing.BoxLayout;
-import javax.swing.Box;
+public class GUI extends Application implements GUIConstants {
 
-public class GUI {
+	Scene chatScene = new Scene(new VBox());
+	VBox chatlayout = new VBox();
 	
-	static JPanel chatPanel = new JPanel(new GridLayout(1, 1));
-	static JFrame frame = new JFrame("Chat");
-
-	public static void DisplayChat() {
-		chatPanel = new JPanel();
-		chatPanel.setLayout(new BoxLayout(chatPanel, BoxLayout.Y_AXIS));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(chatPanel);
-		frame.setSize(500, 200);
-		frame.setVisible(true);
-	}
-  
-	public static void UpdateChat(String... chatLog) {
-		chatPanel.removeAll();
-		for (String string : chatLog) {
-			JLabel label = new JLabel(string);
-			chatPanel.add(label);
-		}
-		chatPanel.revalidate();
-		chatPanel.updateUI();
+	public void init() throws Exception {
+		//Runs before the start function
 	}
 
-	public static void AddToChat(String s) {
-		JLabel label = new JLabel(s);
-		chatPanel.add(label);
-		chatPanel.revalidate();
-		chatPanel.updateUI();
+	public void start(Stage stage) throws Exception {
+		chatScene = new Scene(chatlayout);
+		chatlayout.getChildren().addAll(new Label("label 1"), new Label("label 2"));
+
+		//TODO Include grid window
+
+		stage.setTitle("DND and stuff!");
+		stage.setWidth(WINDOW_WIDTH);
+		stage.setHeight(WINDOW_HEIGHT);
+		stage.setScene(chatScene);
+		stage.show();
+
+		//AddToChat(new Label("label 3"), new Label("label 4"));
+		//SetChat(new Label("label 5"));
+	}
+
+	public void AddToChat(Label... labels) {
+		chatlayout.getChildren().addAll(labels);
+	}
+
+	public void SetChat(Label... labels) {
+		chatlayout.getChildren().setAll(labels);
 	}
 }
 
