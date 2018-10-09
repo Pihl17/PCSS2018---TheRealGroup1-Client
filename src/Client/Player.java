@@ -1,39 +1,56 @@
 package Client;
 
-enum Action{TALKING, JOINING, LEAVING};
+import java.util.Scanner;
+
+enum Action {
+	TALKING, JOINING, LEAVING
+};
 
 public class Player implements java.io.Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private String userId;
-	private String nickName;
-	private int[] Location;
+	private static String nickName;
+	private int[] location;
 	private Action action;
-	
-	public Player(String userId, String nickName) {
+
+	static Scanner input = new Scanner(System.in);
+
+	public Player(String userId, String nickName, int[] location) {
 		this.userId = userId;
 		this.nickName = nickName;
 	}
-	
-public void SetUserId() {
-	
-}
-public void SetnickName() {
-	
-}
-public String GetnickName() {
-	return nickName;
-}
-public int[] GetLocation() {
-	return Location;
-}
-public void SetLocation() {
-	
-}
-public Action GetAction() {
-	return action;
-}
+
+	public void SetuserId() {
+		String userId = input.nextLine();
+		this.nickName = userId;
+
+	}
+
+	public String GetuserId() {
+		return userId;
+	}
+
+	public static void SetnickName(String nickName) {
+		input.nextLine();
+	}
+
+	public static String GetnickName() {
+		return nickName;
+	}
+
+	public int[] Getlocation() {
+		return location;
+	}
+
+	public void Setlocation() {
+		// Gabby work
+	}
+
+	public Action GetAction() {
+		return action;
+	}
 }

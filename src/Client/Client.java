@@ -16,32 +16,29 @@ public class Client {
 		Socket socket;
 		boolean cont = true;
 
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 
 		try {
-			socket = new Socket("localhost", 1916);
+			socket = new Socket("192.168.43.43", 1916);
 			System.out.println("Connected to server");
 
 			in = new DataInputStream(socket.getInputStream());
 
 			out = new DataOutputStream(socket.getOutputStream());
 
-			while (cont) {
+		while (cont) {
 
 				System.out.println("Welcome");
-
+				new Player(null, null, null);
+				Player.SetnickName(null);
 				
 				
-				System.out.println("Would you like to continue?");
-				System.out.println("1=Yes");
-				System.out.println("2 = no");
 				
-				double exit = input.nextDouble();
-				if (exit == 2) {
-					cont = false;
-					System.out.println("System Terminated");
-					
-				}
+				
+				
+				
+				
 			}
 		}
 
