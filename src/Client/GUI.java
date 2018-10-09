@@ -9,13 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
-//import javafx.scene.layout.AnchorPane;
 
 public class GUI extends Application implements GUIConstants {
 
 	GridPane mainPane = new GridPane();
 	GridPane chatPane = new GridPane();
-	GridPane inputPane = new GridPane();
 	Scene mainScene = new Scene(mainPane);
 	VBox chatlog = new VBox();
 	TextField chatField;
@@ -27,59 +25,61 @@ public class GUI extends Application implements GUIConstants {
 	}
 
 	public void start(Stage stage) throws Exception {
-		//TODO Delete these 3 lines! (only used for testing)
-		VBox box2 = new VBox();
-		box2.getChildren().addAll(new Label("label 1-2"), new Label("label 2-2"));
-		box2.setMinSize(100, 100);
-
-		//TODO Include write to chat pane
-		chatPane.setMaxSize(CHAT_WIDTH, CHAT_HEIGHT);
-		chatPane.setMinSize(CHAT_WIDTH, CHAT_HEIGHT);
-		chatlog.setMaxHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
-		for (int i = 0; i < CHAT_MAX_LOGS; i++)
-			AddToChat(new Label());
-		chatField = new TextField();
-		chatField.setMaxHeight(CHATBUTTON_HEIGHT);
-		chatField.setMaxWidth(CHAT_WIDTH - CHATBUTTON_HEIGHT);
-		sendButton = new Button("Send");
-		sendButton.setMinSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
-		sendButton.setOnAction(action -> {
-			if (!chatField.getText().equals("")) {
-				AddToChat(new Label(chatField.getText()));
-				chatField.setText("");
-			}
-		});
-		
-		/*inputPane.add(chatField, 0, 0);
-		inputPane.add(sendButton, 1, 0);
-		chatPane.setTopAnchor(chatlog, 5.0);
-		chatPane.setBottomAnchor(inputPane, 5.0);
-		chatPane.getChildren().addAll(inputPane, chatlog);*/
-
-		chatPane.add(chatlog, 0, 0);
-		chatPane.add(chatField, 0, 1);
-		chatPane.add(sendButton, 1, 1);
-
-		//TODO Include grid pane
-		
-		//TODO Include Lobby pane
+		SetUpChatlog();
+		chatField = ChatField();
+		sendButton = SendButton();
+		chatPane = ChatPane();
 
 		mainPane = new GridPane();
 		mainScene = new Scene(mainPane);
 		mainPane.setVgap(10);
 		mainPane.setHgap(10);
 		mainPane.add(chatPane, 0, 0);
-		mainPane.add(box2, 1, 0); //TODO Delete this! (used for testing)
+		//TODO Include grid pane
+		//TODO Include Lobby pane
 
-		stage.setTitle("DND and stuff!");
+		stage.setTitle("DND");
 		stage.setWidth(WINDOW_WIDTH);
 		stage.setHeight(WINDOW_HEIGHT);
 		stage.setScene(mainScene);
 		stage.show();
-
-		//AddToChat(new Label("label 3"), new Label("label 4"));
-		//SetChat(new Label("label 5"));
 	}
+
+	public GridPane ChatPane() {
+		GridPane pane = new GridPane();
+		pane.setMinSize(CHAT_WIDTH, CHAT_HEIGHT);
+		pane.add(chatlog, 0, 0);
+		pane.add(chatField, 0, 1);
+		pane.add(sendButton, 1, 1);
+		return pane;
+	}
+
+	public void SetUpChatlog() {
+		chatlog.setMaxHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
+		for (int i = 0; i < CHAT_MAX_LOGS; i++)
+			AddToChat(new Label());
+	}
+
+	public TextField ChatField() {
+		TextField field = new TextField();
+		field.setMaxHeight(CHATBUTTON_HEIGHT);
+		field.setMinWidth(CHAT_WIDTH - CHATBUTTON_HEIGHT);
+		return field;
+	}
+
+	public Button SendButton() {
+		Button button = new Button("Send");
+		button.setMinSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
+		button.setOnAction(action -> {
+			if (!chatField.getText().equals("")) {
+				AddToChat(new Label(chatField.getText())); //TODO Make it send it to the network/Client class
+				chatField.setText("");
+			}
+		});
+		//TODO Sending text by pressing enter
+		return button;
+	}
+
 
 	public void AddToChat(Label... labels) {
 		chatlog.getChildren().addAll(labels);
@@ -91,7 +91,7 @@ public class GUI extends Application implements GUIConstants {
 		RemoveOldLogs();
 	}
 
-	public void RemoveOldLogs() {
+	void RemoveOldLogs() {
 		while (chatlog.getChildren().size() > CHAT_MAX_LOGS) {
 			chatlog.getChildren().remove(0);
 		}
