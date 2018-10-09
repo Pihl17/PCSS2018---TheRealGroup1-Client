@@ -15,13 +15,16 @@ public class Grid extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception  {
-		int rows = 6;
-		int columns = 6;
+		int rows = 7;
+		int columns = 7;
 
+		int location = 36;
+		
 		GridPane gridPane = new GridPane();
 
 		Scene scene = new Scene(gridPane);
-
+		
+		
 		// creating background color
 		gridPane.setStyle("-fx-background-color: darkred; -fx-grid-lines-visible: true");
 		// setting up the rows
@@ -29,7 +32,7 @@ public class Grid extends Application {
 			RowConstraints row = new RowConstraints(120);
 			gridPane.getRowConstraints().add(row);
 		}
-
+		
 		// setting up the columns
 		for (int i = 0; i < columns; i++) {
 			ColumnConstraints column = new ColumnConstraints(120);
@@ -37,16 +40,22 @@ public class Grid extends Application {
 		}
 		
 		
+		
 		//emojis
 		Label happy = new Label("\ud83d\ude02"); 
 		Label whisper = new Label("\ud83d\udcac");
 		Label snooping = new Label("\ud83d\udc40"); 
-		Label shouting = new Label("\ud83d\udce2"); 
-		Label oconnor = new Label("\ud83d\ude4b");
+		Label shouting = new Label("\ud83d\udce2");
 		
+		// avatars
+		Label oconnor = new Label("\ud83d\ude4b");
+		Label beer = new Label("\ud83c\udf7b");
+		
+		GridPane.setHalignment(beer, HPos.CENTER);
+		beer.setStyle("-fx-font-size:100px;");
 		GridPane.setHalignment(oconnor, HPos.CENTER);
 		oconnor.setStyle("-fx-font-size:100px;");
-		gridPane.add(oconnor, 0, 1);
+		//gridPane.add(oconnor, 1, 0 );
 		
 		GridPane.setHalignment(happy, HPos.CENTER);
 		happy.setStyle("-fx-font-size:100px; ");
@@ -60,13 +69,27 @@ public class Grid extends Application {
 		snooping.setStyle("-fx-font-size:100px;");
 		gridPane.add(snooping, 2, 0);
 		
-		GridPane.setHalignment(shouting, HPos.CENTER);
-		shouting.setStyle("-fx-font-size:100px;");
-		gridPane.add(shouting, 3, 0);
+		
+		
 		
 		//location of mouseclicked
 		scene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			System.out.format("pressed:, x: %.2f, y: %.2f\n", e.getSceneX(), e.getSceneY());
+			int x = (int) e.getSceneX();
+			int y = (int) e.getSceneY();
+			
+			x = (int) Math.floor(x/120);
+			y = (int) Math.floor(y/120);
+			
+			if(gridPane.getColumnIndex(beer) == null) 
+				gridPane.add(beer, x, y);
+			
+			else 
+				gridPane.setConstraints(beer, x, y);
+			
+			
+			
+			//System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
+			
 		});
 		
         

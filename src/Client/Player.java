@@ -46,9 +46,11 @@ public class Player implements java.io.Serializable {
 		return location;
 	}
 
-	public void Setlocation() {
-		// Gabby work
+	public void SetAvatar() {
+		// switch case 
 	}
+	
+	
 
 	public Action GetAction() {
 		return action;
