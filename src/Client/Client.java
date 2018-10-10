@@ -7,12 +7,18 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Client {
+
+	public static DataInputStream in;
+	public static DataOutputStream out;
+	public static Socket socket;
+	public static boolean cont = true;
+
 	public static void main(String[] args) {
 
-		DataInputStream in;
+		/*DataInputStream in;
 		DataOutputStream out;
 		Socket socket;
-		boolean cont = true;
+		boolean cont = true;*/
 
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
