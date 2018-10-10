@@ -9,8 +9,7 @@ import java.util.Scanner;
 public class Client {
 	public static void main(String[] args) {
 
-   	 // int port = 8000;
-	 // String host = "localhost";
+   
 		DataInputStream in;
 		DataOutputStream out;
 		Socket socket;
@@ -31,12 +30,12 @@ public class Client {
 
 				System.out.println("Welcome");
 				new Player(null, null, null);
-				Player.SetnickName(null);
+			//	Player.SetnickName(null);
 				
-				
-				
-				
-				
+				String nickName = input.nextLine();
+				out.writeUTF(nickName);
+			//	System.out.println(in.readInt());
+		
 				
 				
 			}
