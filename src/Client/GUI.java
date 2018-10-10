@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.RowConstraints;
 
 public class GUI extends Application implements GUIConstants {
@@ -71,6 +72,10 @@ public class GUI extends Application implements GUIConstants {
 		TextField field = new TextField();
 		field.setMaxHeight(CHATBUTTON_HEIGHT);
 		field.setMinWidth(CHAT_WIDTH - CHATBUTTON_HEIGHT);
+		field.setOnKeyPressed((event) -> {
+			if (event.getCode() == KeyCode.ENTER)
+				SendToChat(chatField);
+		});
 		return field;
 	}
 
@@ -78,13 +83,16 @@ public class GUI extends Application implements GUIConstants {
 		Button button = new Button("Send");
 		button.setMinSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
 		button.setOnAction(action -> {
-			if (!chatField.getText().equals("")) {
-				AddToChat(new Label(chatField.getText())); //TODO Make it send it to the network/Client class
-				chatField.setText("");
-			}
+			SendToChat(chatField);
 		});
-		//TODO Sending text by pressing enter
 		return button;
+	}
+
+	public void SendToChat(TextField field) {
+		if (!field.getText().equals("")) {
+				AddToChat(new Label(field.getText())); //TODO Make it send it to the network/Client class
+				field.setText("");
+		}
 	}
 
 
