@@ -1,8 +1,8 @@
 package Client;
 
 public interface GUIConstants {
-	int WINDOW_WIDTH = 350;
-	int WINDOW_HEIGHT = 300;
+	int WINDOW_WIDTH = 1200;
+	int WINDOW_HEIGHT = 800;
 
 	int CHAT_MAX_LOGS = 10;
 	int CHAT_WIDTH = 300;
