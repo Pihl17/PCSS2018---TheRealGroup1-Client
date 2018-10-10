@@ -17,7 +17,7 @@ import javafx.scene.layout.RowConstraints;
 
 public class GUI extends Application implements GUIConstants {
 	GridPane gridPane = new GridPane();
-	
+
 	GridPane mainPane = new GridPane();
 	GridPane chatPane = new GridPane();
 	Scene mainScene = new Scene(mainPane);
@@ -25,9 +25,8 @@ public class GUI extends Application implements GUIConstants {
 	TextField chatField;
 	Button sendButton;
 
-	
 	public void init() throws Exception {
-		//Runs before the start function
+		// Runs before the start function
 	}
 
 	public void start(Stage stage) throws Exception {
@@ -41,10 +40,10 @@ public class GUI extends Application implements GUIConstants {
 		mainPane.setVgap(10);
 		mainPane.setHgap(10);
 		mainPane.add(chatPane, 0, 0);
-		//TODO Include grid pane
+		// TODO Include grid pane
 		gridPane = CreateGrid();
 		mainPane.add(gridPane, 1, 0);
-		//TODO Include Lobby pane
+		// TODO Include Lobby pane
 
 		stage.setTitle("DND");
 		stage.setWidth(WINDOW_WIDTH);
@@ -90,11 +89,10 @@ public class GUI extends Application implements GUIConstants {
 
 	public void SendToChat(TextField field) {
 		if (!field.getText().equals("")) {
-				AddToChat(new Label(field.getText())); //TODO Make it send it to the network/Client class
-				field.setText("");
+			AddToChat(new Label(field.getText())); // TODO Make it send it to the network/Client class
+			field.setText("");
 		}
 	}
-
 
 	public void AddToChat(Label... labels) {
 		chatlog.getChildren().addAll(labels);
@@ -111,13 +109,14 @@ public class GUI extends Application implements GUIConstants {
 			chatlog.getChildren().remove(0);
 		}
 	}
-	public GridPane CreateGrid()  {
-		
+
+	public GridPane CreateGrid() {
+
 		int rows = 7;
 		int columns = 7;
-		
+
 		GridPane gridPane = new GridPane();
-		
+
 		// creating background color
 		gridPane.setStyle("-fx-background-color: darkred; -fx-grid-lines-visible: true");
 		// setting up the rows
@@ -125,55 +124,49 @@ public class GUI extends Application implements GUIConstants {
 			RowConstraints row = new RowConstraints(120);
 			gridPane.getRowConstraints().add(row);
 		}
-		
+
 		// setting up the columns
 		for (int i = 0; i < columns; i++) {
 			ColumnConstraints column = new ColumnConstraints(120);
 			gridPane.getColumnConstraints().add(column);
 		}
-		
-		
-		
-		//emojis
-		Label happy = new Label("\u2603"); 
+
+		// emojis
+		Label happy = new Label("\u2603");
 		Label whisper = new Label("\ud83d\udcac");
-		Label snooping = new Label("\ud83d\udc40"); 
+		Label snooping = new Label("\ud83d\udc40");
 		Label shouting = new Label("\ud83d\udce2");
-		
+
 		GridPane.setHalignment(happy, HPos.CENTER);
 		happy.setStyle("-fx-font-size:100px; ");
 		gridPane.add(happy, 0, 0);
-		
+
 		GridPane.setHalignment(whisper, HPos.CENTER);
 		whisper.setStyle("-fx-font-size:100px;");
 		gridPane.add(whisper, 1, 0);
-		
+
 		GridPane.setHalignment(snooping, HPos.CENTER);
 		snooping.setStyle("-fx-font-size:100px;");
 		gridPane.add(snooping, 2, 0);
-		
-		
-		
-		//location of mouseclicked
-				mainScene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-					int x = (int) e.getSceneX();
-					int y = (int) e.getSceneY();
-					
-					x = (int) Math.floor((x-CHAT_WIDTH)/120);
-					y = (int) Math.floor(y/120);
-					
-					
-					//	TODO Wait for player function object to get called and then call GetAvatar
-					/*if(gridPane.getColumnIndex(avatar) == null) 
-						gridPane.add(, x, y);
-					
-					else 
-						gridPane.setConstraints(beer, x, y);*/
-					//System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
-					
-				});
-		
+
+		// location of mouseclicked
+		mainScene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+			int x = (int) e.getSceneX();
+			int y = (int) e.getSceneY();
+
+			x = (int) Math.floor((x - CHAT_WIDTH) / 120);
+			y = (int) Math.floor(y / 120);
+
+			// TODO Wait for player function object to get called and then call GetAvatar
+			/*
+			 * if(gridPane.getColumnIndex(avatar) == null) gridPane.add(, x, y);
+			 * 
+			 * else gridPane.setConstraints(beer, x, y);
+			 */
+			// System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
+
+		});
+
 		return gridPane;
 	}
 }
-

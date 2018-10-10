@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Client {
 	public static void main(String[] args) {
 
-   
 		DataInputStream in;
 		DataOutputStream out;
 		Socket socket;
@@ -26,19 +25,18 @@ public class Client {
 
 			out = new DataOutputStream(socket.getOutputStream());
 
-		while (cont) {
+			while (cont) {
 
 				System.out.println("Welcome");
 				new Player(null, null, null);
-			//	Player.SetnickName(null);
-				
+
+				// Player.SetnickName(null);
+
 				String nickName = input.nextLine();
 				out.writeUTF(nickName);
-			//	System.out.println(in.readInt());
-			//	stuff needs to go here
-			
-				
-				
+				// System.out.println(in.readInt());
+				// stuff needs to go here
+
 			}
 		}
 
