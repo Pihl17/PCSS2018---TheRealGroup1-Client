@@ -35,7 +35,8 @@ public class Client {
 				String nickName = input.nextLine();
 				out.writeUTF(nickName);
 			//	System.out.println(in.readInt());
-		
+			//	stuff needs to go here
+			
 				
 				
 			}
