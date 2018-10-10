@@ -56,6 +56,7 @@ public class GUI extends Application implements GUIConstants {
 	public GridPane ChatPane() {
 		GridPane pane = new GridPane();
 		pane.setMinSize(CHAT_WIDTH, CHAT_HEIGHT);
+		pane.setMaxSize(CHAT_WIDTH, CHAT_HEIGHT);
 		pane.add(chatlog, 0, 0);
 		pane.add(chatField, 0, 1);
 		pane.add(sendButton, 1, 1);
@@ -71,7 +72,7 @@ public class GUI extends Application implements GUIConstants {
 	public TextField ChatField() {
 		TextField field = new TextField();
 		field.setMaxHeight(CHATBUTTON_HEIGHT);
-		field.setMinWidth(CHAT_WIDTH - CHATBUTTON_HEIGHT);
+		field.setMinWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
 		field.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ENTER)
 				SendToChat(chatField);
@@ -142,7 +143,7 @@ public class GUI extends Application implements GUIConstants {
 		
 		GridPane.setHalignment(happy, HPos.CENTER);
 		happy.setStyle("-fx-font-size:100px; ");
-		gridPane.add(happy, 0, 0);
+		//gridPane.add(happy, 0, 0);
 		
 		GridPane.setHalignment(whisper, HPos.CENTER);
 		whisper.setStyle("-fx-font-size:100px;");
@@ -159,18 +160,17 @@ public class GUI extends Application implements GUIConstants {
 					int x = (int) e.getSceneX();
 					int y = (int) e.getSceneY();
 					
-					x = (int) Math.floor((x-CHAT_WIDTH)/120);
+					x = (int) Math.floor((x-(CHAT_WIDTH + mainPane.getHgap()))/120);
 					y = (int) Math.floor(y/120);
 					
-					
+					if (x >= 0 && x < columns && y >= 0 && y < rows) {
 					//	TODO Wait for player function object to get called and then call GetAvatar
-					/*if(gridPane.getColumnIndex(avatar) == null) 
-						gridPane.add(, x, y);
-					
-					else 
-						gridPane.setConstraints(beer, x, y);*/
-					//System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
-					
+						if(gridPane.getColumnIndex(happy) == null) 
+							gridPane.add(happy, x, y);	
+						else 
+							gridPane.setConstraints(happy, x, y);
+						//System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
+					}
 				});
 		
 		return gridPane;
