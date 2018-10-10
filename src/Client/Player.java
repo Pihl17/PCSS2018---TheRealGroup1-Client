@@ -26,7 +26,7 @@ public class Player implements java.io.Serializable {
 
 	public void SetuserId() {
 		String userId = input.nextLine();
-		this.nickName = userId;
+		
 
 	}
 
@@ -36,6 +36,7 @@ public class Player implements java.io.Serializable {
 
 	public static void SetnickName(String nickName) {
 		input.nextLine();
+	
 	}
 
 	public static String GetnickName() {
