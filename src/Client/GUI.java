@@ -221,6 +221,7 @@ public class GUI extends Application implements GUIConstants {
 					y = (int) Math.floor(y/TILE_HEIGHT);
 					
 					try {
+						if (x >= 0 && x < columns && y >= 0 && y < rows)
 							Client.out.writeUTF("changepos " + x + " " + y);
 					} catch (IOException ex) {} catch (NullPointerException ex) {}
 					setLocation(rows, columns, gridPane, x, y, player.GetLabel());
