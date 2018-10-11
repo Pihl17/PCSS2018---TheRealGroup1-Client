@@ -34,6 +34,8 @@ public class Client {
 			Main.Gui.player = new Player(null, null, null);
 			Main.Gui.player.SetAvatar();
 
+			new IThread().start();
+
 			while (cont) {
 
 				//System.out.println("Welcome");
