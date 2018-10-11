@@ -24,6 +24,7 @@ public class GUI extends Application implements GUIConstants {
 	VBox chatlog = new VBox();
 	TextField chatField;
 	Button sendButton;
+	Player player = new Player(null, null, null);
 
 	public void init() throws Exception {
 		// Runs before the start function
@@ -185,12 +186,12 @@ public class GUI extends Application implements GUIConstants {
 					x = (int) Math.floor((x-(CHAT_WIDTH + mainPane.getHgap()))/120);
 					y = (int) Math.floor(y/120);
 					
-					if (x >= 0 && x < columns && y >= 0 && y < rows) {
+					if (x >= 0 && x < columns && y >= 0 && y < rows && player.GetLabel() != null) {
 					//	TODO Wait for player function object to get called and then call GetAvatar
-						if(gridPane.getColumnIndex(happy) == null) 
-							gridPane.add(happy, x, y);	
+						if(gridPane.getColumnIndex(player.GetLabel()) == null) 
+							gridPane.add(player.GetLabel(), x, y);	
 						else 
-							gridPane.setConstraints(happy, x, y);
+							gridPane.setConstraints(player.GetLabel(), x, y);
 						//System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
 					}
 				});
