@@ -34,14 +34,15 @@ public class Client {
 			while (cont) {
 
 				System.out.println("Welcome");
+				Main.Gui.player = new Player(null, null, null);
+				Main.Gui.player.SetAvatar();
 
 				// Player.SetnickName(null);
 
 				String nickName = input.nextLine();
 				out.writeUTF(nickName);
 				
-				Main.Gui.player = new Player(null, null, null);
-				Main.Gui.player.SetAvatar();
+				
 				// System.out.println(in.readInt());
 				// stuff needs to go here
 

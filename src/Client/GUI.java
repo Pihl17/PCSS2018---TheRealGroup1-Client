@@ -51,7 +51,7 @@ public class GUI extends Application implements GUIConstants {
 		mainPane.add(chatPane, 0, 0);
 		gridPane = CreateGrid();
 		mainPane.add(gridPane, 1, 0);
-		mainPane.add(StartButton(),1,1);
+		mainPane.add(StartButton(),2,0);
 		
 		new IThread().start();
 		
