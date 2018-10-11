@@ -8,10 +8,12 @@ import java.net.Socket;
 public class IThread extends Thread {
 
 	public void run() {
-		while (true) {
-			String output = Client.in.readUTF();
-			//"poschange"+ this.threadName + " " + playerPos (String that is broadcast whenever any player changes position)
-		}
+		try {
+			while (true) {
+				String output = Client.in.readUTF();
+				//"poschange"+ this.threadName + " " + playerPos (String that is broadcast whenever any player changes position)
+			}
+		} catch (Exception e) {}
 	}
 
 }
