@@ -1,5 +1,7 @@
 package Client;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.embed.swing.JFXPanel;
 import javafx.geometry.HPos;
@@ -34,6 +36,9 @@ public class GUI extends Application implements GUIConstants {
 	}
 
 	public void start(Stage stage) throws Exception {
+		Main.Gui = this;
+		stage.setFullScreen(true);
+		
 		SetUpChatlog();
 		chatField = ChatField();
 		sendButton = SendButton();
@@ -49,17 +54,17 @@ public class GUI extends Application implements GUIConstants {
 		// TODO Include Lobby pane
 
 		stage.setTitle("DND");
-		stage.setWidth(WINDOW_WIDTH);
-		stage.setHeight(WINDOW_HEIGHT);
+		//stage.setWidth(WINDOW_WIDTH);
+	//	stage.setHeight(WINDOW_HEIGHT);
 		stage.setScene(mainScene);
 		stage.show();
 	}
 
 	public GridPane ChatPane() {
 		GridPane pane = new GridPane();
-		pane.setMinSize(CHAT_WIDTH, CHAT_HEIGHT);
-		pane.setMaxSize(CHAT_WIDTH, CHAT_HEIGHT);
-		pane.setPrefSize(CHAT_WIDTH, CHAT_HEIGHT);
+		//pane.setMinSize(CHAT_WIDTH, CHAT_HEIGHT);
+	//	pane.setMaxSize(CHAT_WIDTH, CHAT_HEIGHT);
+	//	pane.setPrefSize(CHAT_WIDTH, CHAT_HEIGHT);
 		pane.add(chatlog, 0, 0);
 		pane.add(chatField, 0, 1);
 		pane.add(sendButton, 1, 1);
@@ -67,18 +72,18 @@ public class GUI extends Application implements GUIConstants {
 	}
 
 	public void SetUpChatlog() {
-		chatlog.setMaxHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
-		chatlog.setPrefHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
+		//chatlog.setMaxHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
+	//	chatlog.setPrefHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
 		for (int i = 0; i < CHAT_MAX_LOGS; i++)
 			AddToChat(new Label());
 	}
 
 	public TextField ChatField() {
 		TextField field = new TextField();
-		field.setMaxHeight(CHATBUTTON_HEIGHT);
-		field.setMinWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
-		field.setPrefHeight(CHATBUTTON_HEIGHT);
-		field.setPrefWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
+	//	field.setMaxHeight(CHATBUTTON_HEIGHT);
+	//	field.setMinWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
+	//	field.setPrefHeight(CHATBUTTON_HEIGHT);
+	//	field.setPrefWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
 		field.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ENTER)
 				SendToChat(chatField);
@@ -88,8 +93,8 @@ public class GUI extends Application implements GUIConstants {
 
 	public Button SendButton() {
 		Button button = new Button("Send");
-		button.setMinSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
-		button.setPrefSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
+	//	button.setMinSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
+	//	button.setPrefSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
 		button.setOnAction(action -> {
 			SendToChat(chatField);
 		});
@@ -98,7 +103,14 @@ public class GUI extends Application implements GUIConstants {
 
 	public void SendToChat(TextField field) {
 		if (!field.getText().equals("")) {
-			AddToChat(new Label(field.getText())); // TODO Make it send it to the network/Client class
+			//AddToChat(new Label(field.getText())); // TODO Make it send it to the network/Client class
+			new Thread(){
+				public void run() {
+					try {
+						Client.out.writeUTF(field.getText());
+					} catch (IOException e) {}
+				}
+			}.start();
 			field.setText("");
 		}
 	}
@@ -191,20 +203,24 @@ public class GUI extends Application implements GUIConstants {
 					int x = (int) e.getSceneX();
 					int y = (int) e.getSceneY();
 					
-					x = (int) Math.floor((x-(CHAT_WIDTH + mainPane.getHgap()))/TILE_WIDTH);
+					x = (int) Math.floor((x-(chatPane.getWidth() + mainPane.getHgap()))/TILE_WIDTH);
 					y = (int) Math.floor(y/TILE_HEIGHT);
 					
-					if (x >= 0 && x < columns && y >= 0 && y < rows && player.GetLabel() != null) {
-					//	TODO Wait for player function object to get called and then call GetAvatar
-						if(gridPane.getColumnIndex(player.GetLabel()) == null) 
-							gridPane.add(player.GetLabel(), x, y);	
-						else 
-							gridPane.setConstraints(player.GetLabel(), x, y);
-						//System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
-					}
+					setLocation(rows, columns, gridPane, x, y, player.GetLabel());
 				});
 		
 
 		return gridPane;
+	}
+
+	public void setLocation(int rows, int columns, GridPane gridPane, int x, int y, Label avatar) {
+		if (x >= 0 && x < columns && y >= 0 && y < rows && avatar != null) {
+		//	TODO Wait for player function object to get called and then call GetAvatar
+			if(gridPane.getColumnIndex(avatar) == null) 
+				gridPane.add(avatar, x, y);	
+			else 
+				gridPane.setConstraints(avatar, x, y);
+			//System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
+		}
 	}
 }
