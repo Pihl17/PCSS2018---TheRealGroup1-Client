@@ -37,7 +37,7 @@ public class Client {
 			new IThread().start();
 			new Thread(new UIThread()).start();
 
-			while (cont) {
+			//while (cont) {
 
 				//System.out.println("Welcome");
 			
@@ -51,7 +51,7 @@ public class Client {
 				// System.out.println(in.readInt());
 				// stuff needs to go here
 
-			}
+			//}
 		}
 
 		catch (IOException e) {
