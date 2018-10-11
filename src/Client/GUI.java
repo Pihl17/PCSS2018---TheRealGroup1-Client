@@ -1,6 +1,7 @@
 package Client;
 
 import javafx.application.Application;
+import javafx.embed.swing.JFXPanel;
 import javafx.geometry.HPos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -15,12 +16,14 @@ import javafx.scene.layout.Region;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.RowConstraints;
 
+
 public class GUI extends Application implements GUIConstants {
+	JFXPanel jfxPanel = new JFXPanel();
 	GridPane gridPane = new GridPane();
 
 	GridPane mainPane = new GridPane();
 	GridPane chatPane = new GridPane();
-	Scene mainScene = new Scene(mainPane);
+	Scene mainScene = new Scene(mainPane); 
 	VBox chatlog = new VBox();
 	TextField chatField;
 	Button sendButton;
