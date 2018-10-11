@@ -25,6 +25,12 @@ public class Player implements java.io.Serializable {
 	
 	
 	static Scanner input = new Scanner(System.in);
+	
+	public Player(String userId, int avatar) {
+		this.userId = userId;
+		this.avatar = avatar;
+		SetAvatar();
+	}
 
 	public Player(String userId, String nickName, Label label) {
 		this.userId = userId;

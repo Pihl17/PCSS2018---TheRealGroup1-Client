@@ -1,13 +1,12 @@
 package Client;
 
-import java.util.concurrent.Executor;
-
 public class Main {
 
-	public static void main(String[] args) {
+	public static GUI Gui;
+	//public static void main(String[] args) {
 
-	new Thread(new UIThread()).start();
+	//new Thread(new UIThread()).start();
 
-	}
+	//}
 
 }
