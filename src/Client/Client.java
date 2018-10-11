@@ -43,8 +43,8 @@ public class Client {
 
 				// Player.SetnickName(null);
 
-				String nickName = input.nextLine();
-				out.writeUTF(nickName);
+				//String nickName = input.nextLine();
+				//out.writeUTF(nickName);
 				
 				
 				// System.out.println(in.readInt());
