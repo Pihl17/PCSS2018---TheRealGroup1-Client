@@ -220,6 +220,9 @@ public class GUI extends Application implements GUIConstants {
 					x = (int) Math.floor((x-(chatPane.getWidth() + mainPane.getHgap()))/TILE_WIDTH);
 					y = (int) Math.floor(y/TILE_HEIGHT);
 					
+					try {
+						Client.out.writeUTF("changepos " + x + " " + y);
+					} catch (IOException ex) {}
 					setLocation(rows, columns, gridPane, x, y, player.GetLabel());
 				});
 		
