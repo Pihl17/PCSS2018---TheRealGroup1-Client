@@ -40,7 +40,6 @@ public class GUI extends Application implements GUIConstants {
 		mainPane.setVgap(10);
 		mainPane.setHgap(10);
 		mainPane.add(chatPane, 0, 0);
-		// TODO Include grid pane
 		gridPane = CreateGrid();
 		mainPane.add(gridPane, 1, 0);
 		// TODO Include Lobby pane
