@@ -26,14 +26,13 @@ public class Player implements java.io.Serializable {
 	
 	static Scanner input = new Scanner(System.in);
 
-	public Player(String userId, String nickName, int[] location) {
+	public Player(String userId, String nickName, Label label) {
 		this.userId = userId;
 		this.nickName = nickName;
 	}
 
 	public void SetuserId() {
 		String userId = input.nextLine();
-		
 
 	}
 
