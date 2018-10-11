@@ -31,11 +31,13 @@ public class Client {
 
 			out = new DataOutputStream(socket.getOutputStream());
 
+			Main.Gui.player = new Player(null, null, null);
+			Main.Gui.player.SetAvatar();
+
 			while (cont) {
 
-				System.out.println("Welcome");
-				Main.Gui.player = new Player(null, null, null);
-				Main.Gui.player.SetAvatar();
+				//System.out.println("Welcome");
+			
 
 				// Player.SetnickName(null);
 
