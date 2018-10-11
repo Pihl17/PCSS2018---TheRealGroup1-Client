@@ -14,7 +14,7 @@ public class Client {
 	public static boolean cont = true;
 
 	public static void main(String[] args) {
-
+		new Thread(new UIThread()).start();
 		/*DataInputStream in;
 		DataOutputStream out;
 		Socket socket;

@@ -51,13 +51,16 @@ public class GUI extends Application implements GUIConstants {
 		mainPane.add(chatPane, 0, 0);
 		gridPane = CreateGrid();
 		mainPane.add(gridPane, 1, 0);
-		// TODO Include Lobby pane
-
+		mainPane.add(StartButton(),1,1);
+		
+		new IThread().start();
+		
 		stage.setTitle("DND");
 		//stage.setWidth(WINDOW_WIDTH);
 	//	stage.setHeight(WINDOW_HEIGHT);
 		stage.setScene(mainScene);
 		stage.show();
+	
 	}
 
 	public GridPane ChatPane() {
@@ -90,7 +93,18 @@ public class GUI extends Application implements GUIConstants {
 		});
 		return field;
 	}
+	public Button StartButton() {
+		Button button = new Button("Start Game");
+			button.setOnAction(action -> {
+				try {
+					Client.out.writeUTF("startgame a");
+				} catch (IOException e) {
 
+				}
+			});
+		return button;
+		
+	}
 	public Button SendButton() {
 		Button button = new Button("Send");
 	//	button.setMinSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
