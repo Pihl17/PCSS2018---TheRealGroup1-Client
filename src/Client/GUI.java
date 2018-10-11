@@ -59,6 +59,7 @@ public class GUI extends Application implements GUIConstants {
 		GridPane pane = new GridPane();
 		pane.setMinSize(CHAT_WIDTH, CHAT_HEIGHT);
 		pane.setMaxSize(CHAT_WIDTH, CHAT_HEIGHT);
+		pane.setPrefSize(CHAT_WIDTH, CHAT_HEIGHT);
 		pane.add(chatlog, 0, 0);
 		pane.add(chatField, 0, 1);
 		pane.add(sendButton, 1, 1);
@@ -67,6 +68,7 @@ public class GUI extends Application implements GUIConstants {
 
 	public void SetUpChatlog() {
 		chatlog.setMaxHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
+		chatlog.setPrefHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
 		for (int i = 0; i < CHAT_MAX_LOGS; i++)
 			AddToChat(new Label());
 	}
@@ -75,6 +77,8 @@ public class GUI extends Application implements GUIConstants {
 		TextField field = new TextField();
 		field.setMaxHeight(CHATBUTTON_HEIGHT);
 		field.setMinWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
+		field.setPrefHeight(CHATBUTTON_HEIGHT);
+		field.setPrefWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
 		field.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ENTER)
 				SendToChat(chatField);
@@ -85,6 +89,7 @@ public class GUI extends Application implements GUIConstants {
 	public Button SendButton() {
 		Button button = new Button("Send");
 		button.setMinSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
+		button.setPrefSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
 		button.setOnAction(action -> {
 			SendToChat(chatField);
 		});
@@ -116,8 +121,8 @@ public class GUI extends Application implements GUIConstants {
 
 	public GridPane CreateGrid() {
 
-		int rows = 7;
-		int columns = 7;
+		int rows = ROWS;
+		int columns = COLUMNS;
 
 		GridPane gridPane = new GridPane();
 
@@ -125,13 +130,13 @@ public class GUI extends Application implements GUIConstants {
 		gridPane.setStyle("-fx-background-color: darkred; -fx-grid-lines-visible: true");
 		// setting up the rows
 		for (int i = 0; i < rows; i++) {
-			RowConstraints row = new RowConstraints(120);
+			RowConstraints row = new RowConstraints(TILE_HEIGHT);
 			gridPane.getRowConstraints().add(row);
 		}
 
 		// setting up the columns
 		for (int i = 0; i < columns; i++) {
-			ColumnConstraints column = new ColumnConstraints(120);
+			ColumnConstraints column = new ColumnConstraints(TILE_WIDTH);
 			gridPane.getColumnConstraints().add(column);
 		}
 
@@ -164,8 +169,8 @@ public class GUI extends Application implements GUIConstants {
 			int x = (int) e.getSceneX();
 			int y = (int) e.getSceneY();
 
-			x = (int) Math.floor((x - CHAT_WIDTH) / 120);
-			y = (int) Math.floor(y / 120);
+			x = (int) Math.floor((x - CHAT_WIDTH) / TILE_WIDTH);
+			y = (int) Math.floor(y / TILE_HEIGHT);
 
 			// TODO Wait for player function object to get called and then call GetAvatar
 			/*
@@ -186,8 +191,8 @@ public class GUI extends Application implements GUIConstants {
 					int x = (int) e.getSceneX();
 					int y = (int) e.getSceneY();
 					
-					x = (int) Math.floor((x-(CHAT_WIDTH + mainPane.getHgap()))/120);
-					y = (int) Math.floor(y/120);
+					x = (int) Math.floor((x-(CHAT_WIDTH + mainPane.getHgap()))/TILE_WIDTH);
+					y = (int) Math.floor(y/TILE_HEIGHT);
 					
 					if (x >= 0 && x < columns && y >= 0 && y < rows && player.GetLabel() != null) {
 					//	TODO Wait for player function object to get called and then call GetAvatar
