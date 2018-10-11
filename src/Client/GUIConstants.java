@@ -5,7 +5,7 @@ public interface GUIConstants {
 	
 	
 	int WINDOW_WIDTH = 1200;
-	int WINDOW_HEIGHT = 1000;
+	int WINDOW_HEIGHT = 800;
 
 	int TILE_HEIGHT = 120;
 	int TILE_WIDTH = 120;
