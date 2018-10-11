@@ -122,10 +122,10 @@ public class GUI extends Application implements GUIConstants {
 				public void run() {
 					try {
 						Client.out.writeUTF(field.getText());
+						field.setText("");
 					} catch (IOException e) {}
 				}
 			}.start();
-			field.setText("");
 		}
 	}
 
