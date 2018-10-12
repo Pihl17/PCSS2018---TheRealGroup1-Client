@@ -27,7 +27,5 @@ public class IThread extends Service<String> implements GUIConstants{
 	protected void succeeded() {
 		this.restart();
 	}
-	protected void ready() {
-		this.start();
-	}
+
 }
