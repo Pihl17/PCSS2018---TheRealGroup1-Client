@@ -151,26 +151,6 @@ public class GUI extends Application implements GUIConstants {
 			ColumnConstraints column = new ColumnConstraints(TILE_WIDTH);
 			gridPane.getColumnConstraints().add(column);
 		}
-
-		// emojis // Is this part even needed?
-		Label happy = new Label("\u2603"); 
-		Label whisper = new Label("\ud83d\udcac");
-		Label snooping = new Label("\ud83d\udc40");
-		Label shouting = new Label("\ud83d\udce2");
-
-		GridPane.setHalignment(happy, HPos.CENTER);
-		happy.setStyle("-fx-font-size:100px; ");
-
-		gridPane.add(happy, 0, 0);
-		
-
-		GridPane.setHalignment(whisper, HPos.CENTER);
-		whisper.setStyle("-fx-font-size:100px;");
-		gridPane.add(whisper, 1, 0);
-
-		GridPane.setHalignment(snooping, HPos.CENTER);
-		snooping.setStyle("-fx-font-size:100px;");
-		gridPane.add(snooping, 2, 0);
 		
 		//location of mouseclicked
 				mainScene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
@@ -193,12 +173,10 @@ public class GUI extends Application implements GUIConstants {
 
 	public void setLocation(int rows, int columns, GridPane gridPane, int x, int y, Label avatar) {
 		if (x >= 0 && x < columns && y >= 0 && y < rows && avatar != null) {
-		//	TODO Wait for player function object to get called and then call GetAvatar
 			if(gridPane.getColumnIndex(avatar) == null) 
 				gridPane.add(avatar, x, y);	
 			else 
 				gridPane.setConstraints(avatar, x, y);
-			//System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
 		}
 	}
 }
