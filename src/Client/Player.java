@@ -69,20 +69,20 @@ public class Player implements java.io.Serializable {
 			
 		case 3: 
 			SetLabel(new Label("\u2603"));
-			System.out.println("You are snowman");
+			//System.out.println("You are snowman");
 			break;
 			
 		case 4: 
 			SetLabel(new Label("\u2620"));
-			System.out.println("You are skull");
+			//System.out.println("You are skull");
 			break;
 		case 5: 
 			SetLabel(new Label("\u3020"));
-			System.out.println("You are Weird Face");
+			//System.out.println("You are Weird Face");
 			break;
 		case 6: 
 			SetLabel(new Label("\ud83d\udc35"));
-			System.out.println("You are Monkey");
+			//System.out.println("You are Monkey");
 			break;
 		
 		default: System.out.println("Invalid avatar.");

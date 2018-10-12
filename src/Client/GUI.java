@@ -128,9 +128,13 @@ public class GUI extends Application implements GUIConstants {
 			new Thread(){
 				public void run() {
 					try {
+						if(field.getText().startsWith("/avatar ")) 
+							player.SetAvatar(Integer.parseInt(field.getText().substring(7)));
+						else 
 						Client.out.writeUTF(field.getText());
+						
 						field.setText("");
-					} catch (IOException e) {}
+					} catch (Exception e) {}
 				}
 			}.start();
 		}
