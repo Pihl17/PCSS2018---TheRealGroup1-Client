@@ -15,7 +15,6 @@ public class Player implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String nickName = "";
-	private int[] location = new int[2];
 	private Action action;
 	private Label privateLabel = null;
 	
@@ -36,25 +35,21 @@ public class Player implements java.io.Serializable {
 		SetLabel(label);
 	}
 
-	public void SetuserId(String id) {
+	public void SetUserId(String id) {
 		userId = id;
 	}
 
-	public String GetuserId() {
+	public String GetUserId() {
 		return userId;
 	}
 
-	public void SetnickName(String nickName) {
+	public void SetNickName(String nickName) {
 		this.nickName = nickName;
 	
 	}
 
-	public String GetnickName() {
+	public String GetNickName() {
 		return nickName;
-	}
-
-	public int[] Getlocation() {
-		return location;
 	}
 	
 	

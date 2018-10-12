@@ -17,6 +17,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.RowConstraints;
+import java.util.ArrayList;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.concurrent.WorkerStateEvent;
 
 
 public class GUI extends Application implements GUIConstants {
@@ -29,7 +33,8 @@ public class GUI extends Application implements GUIConstants {
 	VBox chatlog = new VBox();
 	TextField chatField;
 	Button sendButton;
-	Player player;
+	Player player = new Player("This", 1);
+	ArrayList<Player> others = new ArrayList<Player>();
 
 	public void init() throws Exception {
 		// Runs before the start function
@@ -58,7 +63,21 @@ public class GUI extends Application implements GUIConstants {
 		stage.setTitle("DND");
 		stage.setScene(mainScene);
 		stage.show();
-	
+
+		IThread inputService = new IThread();
+		inputService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+			public void handle(WorkerStateEvent t) {
+				String output = t.getSource().getValue().toString();
+				if (output.startsWith("poschange")) {
+					output = output.substring(9);
+					movePlayer(output);
+				} else {
+					AddToChat(new Label(output));
+				}
+				
+			}
+		});
+		inputService.start();
 	}
 
 	public GridPane ChatPane() {
@@ -70,8 +89,10 @@ public class GUI extends Application implements GUIConstants {
 	}
 
 	public void SetUpChatlog() {
+		Label[] labels = new Label[CHAT_MAX_LOGS];
 		for (int i = 0; i < CHAT_MAX_LOGS; i++)
-			AddToChat(new Label());
+			labels[i] = new Label("");
+		SetChat(labels);
 	}
 
 	public TextField ChatField() {
@@ -116,19 +137,15 @@ public class GUI extends Application implements GUIConstants {
 	}
 
 	public void AddToChat(Label... labels) {
+		for (Label label : labels) {
+			System.out.println(label);
+		}
+		for (int i = 0; i < labels.length; i++) { chatlog.getChildren().remove(0); }
 		chatlog.getChildren().addAll(labels);
-		RemoveOldLogs();
 	}
 
 	public void SetChat(Label... labels) {
 		chatlog.getChildren().setAll(labels);
-		RemoveOldLogs();
-	}
-
-	void RemoveOldLogs() {
-		while (chatlog.getChildren().size() > CHAT_MAX_LOGS) {
-			chatlog.getChildren().remove(0);
-		}
 	}
 
 	public GridPane CreateGrid() {
@@ -178,5 +195,21 @@ public class GUI extends Application implements GUIConstants {
 			else 
 				gridPane.setConstraints(avatar, x, y);
 		}
+	}
+
+	public void movePlayer(String output) {
+		String[] split = output.split(" ");
+		int x = Integer.parseInt(split[1]);
+		int y = Integer.parseInt(split[2]);
+		int avatar = Integer.parseInt(split[3]);
+		for (Player other : others) {
+			if(split[0].equals(other.GetUserId())) {
+				setLocation(ROWS, COLUMNS, gridPane, x, y, other.GetLabel());
+					return;
+			}		
+		}
+		Player newPlayer = new Player(split[0], avatar);
+		setLocation(ROWS, COLUMNS, gridPane, x, y, newPlayer.GetLabel());
+		others.add(newPlayer);
 	}
 }

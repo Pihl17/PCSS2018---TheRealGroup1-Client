@@ -20,13 +20,9 @@ public class Client {
 
 			in = new DataInputStream(socket.getInputStream());
 
-			out = new DataOutputStream(socket.getOutputStream());			
+			out = new DataOutputStream(socket.getOutputStream());
 
-			Main.Gui.player = new Player("This", 1);
-
-			new IThread().start();
 			new Thread(new UIThread()).start();
-
 			
 		}
 
