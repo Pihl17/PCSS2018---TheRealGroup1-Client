@@ -16,8 +16,8 @@ public class IThread extends Thread implements GUIConstants{
 		try {
 			while (true) {
 				String output = Client.in.readUTF();
-				//"poschange"+ this.threadName + " " + playerPos (String that is broadcast whenever any player changes position)
 				if (output.startsWith("poschange")) {
+					output = output.substring(9);
 					movePlayer(output);
 				} else {
 					Main.Gui.AddToChat(new Label(output));
@@ -27,7 +27,6 @@ public class IThread extends Thread implements GUIConstants{
 	}
 
 	public void movePlayer(String output) {
-		output = output.substring(9);
 		String[] split = output.split(" ");
 		int x = Integer.parseInt(split[1]);
 		int y = Integer.parseInt(split[2]);

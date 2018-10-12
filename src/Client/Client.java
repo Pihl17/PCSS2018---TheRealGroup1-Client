@@ -11,17 +11,8 @@ public class Client {
 	public static DataInputStream in;
 	public static DataOutputStream out;
 	public static Socket socket;
-	public static boolean cont = true;
-
+	
 	public static void main(String[] args) {
-		
-		/*DataInputStream in;
-		DataOutputStream out;
-		Socket socket;
-		boolean cont = true;*/
-
-		@SuppressWarnings("resource")
-		Scanner input = new Scanner(System.in);
 
 		try {
 			socket = new Socket("192.168.43.43", 1916);
@@ -31,27 +22,12 @@ public class Client {
 
 			out = new DataOutputStream(socket.getOutputStream());
 
-			Main.Gui.player = new Player(null, null, null);
-			Main.Gui.player.SetAvatar();
+			Main.Gui.player = new Player("This", 1);
 
 			new IThread().start();
 			new Thread(new UIThread()).start();
 
-			//while (cont) {
-
-				//System.out.println("Welcome");
 			
-
-				// Player.SetnickName(null);
-
-				//String nickName = input.nextLine();
-				//out.writeUTF(nickName);
-				
-				
-				// System.out.println(in.readInt());
-				// stuff needs to go here
-
-			//}
 		}
 
 		catch (IOException e) {

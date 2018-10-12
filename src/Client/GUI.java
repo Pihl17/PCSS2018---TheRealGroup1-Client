@@ -117,7 +117,6 @@ public class GUI extends Application implements GUIConstants {
 
 	public void SendToChat(TextField field) {
 		if (!field.getText().equals("")) {
-			//AddToChat(new Label(field.getText())); // TODO Make it send it to the network/Client class
 			new Thread(){
 				public void run() {
 					try {
@@ -188,29 +187,6 @@ public class GUI extends Application implements GUIConstants {
 		GridPane.setHalignment(snooping, HPos.CENTER);
 		snooping.setStyle("-fx-font-size:100px;");
 		gridPane.add(snooping, 2, 0);
-
-
-		// location of mouseclicked
-		mainScene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			int x = (int) e.getSceneX();
-			int y = (int) e.getSceneY();
-
-			x = (int) Math.floor((x - CHAT_WIDTH) / TILE_WIDTH);
-			y = (int) Math.floor(y / TILE_HEIGHT);
-
-			// TODO Wait for player function object to get called and then call GetAvatar
-			/*
-			 * if(gridPane.getColumnIndex(avatar) == null) gridPane.add(, x, y);
-			 * 
-			 * else gridPane.setConstraints(beer, x, y);
-			 */
-			// System.out.format("pressed:, x: %.2f, y: %.2f\n", x, y);
-
-		});
-
-
-		
-		
 		
 		//location of mouseclicked
 				mainScene.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
