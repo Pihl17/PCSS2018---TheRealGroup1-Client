@@ -15,12 +15,12 @@ public class Client {
 	public static void main(String[] args) {
 
 		try {
-			socket = new Socket("192.168.43.43", 1916);
+			socket = new Socket(args[0], Integer.parseInt(args[1]));
 			System.out.println("Connected to server");
 
 			in = new DataInputStream(socket.getInputStream());
 
-			out = new DataOutputStream(socket.getOutputStream());
+			out = new DataOutputStream(socket.getOutputStream());			
 
 			Main.Gui.player = new Player("This", 1);
 

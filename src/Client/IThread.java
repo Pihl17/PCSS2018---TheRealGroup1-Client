@@ -30,13 +30,14 @@ public class IThread extends Thread implements GUIConstants{
 		String[] split = output.split(" ");
 		int x = Integer.parseInt(split[1]);
 		int y = Integer.parseInt(split[2]);
+		int avatar = Integer.parseInt(split[3]);
 		for (Player other : others) {
 			if(split[0].equals(other.GetuserId())) {
 				Main.Gui.setLocation(ROWS, COLUMNS, Main.Gui.gridPane, x, y, other.GetLabel());
 					return;
 			}		
 		}
-		Player newPlayer = new Player(split[0], 6);
+		Player newPlayer = new Player(split[0], avatar);
 		Main.Gui.setLocation(ROWS, COLUMNS, Main.Gui.gridPane, x, y, newPlayer.GetLabel());
 		others.add(newPlayer);
 	}

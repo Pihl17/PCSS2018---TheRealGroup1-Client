@@ -93,6 +93,24 @@ public class Player implements java.io.Serializable {
 		default: System.out.println("Invalid avatar.");
 		}
 	}
+
+	public int GetAvatarNumber() {
+		switch (privateLabel.getText()) {
+			case "\ud83d\ude4b":
+				return 1;
+			case "\ud83c\udf7b":
+				return 2;
+			case "\u2603":
+				return 3;
+			case "\u2620":
+				return 4;
+			case "\u3020":
+				return 5;
+			case "\ud83d\udc35":
+				return 6;
+		}
+		return 1;
+	}
 	
 	public Label GetLabel() {
 		return this.privateLabel;

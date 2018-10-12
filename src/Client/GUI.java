@@ -29,7 +29,7 @@ public class GUI extends Application implements GUIConstants {
 	VBox chatlog = new VBox();
 	TextField chatField;
 	Button sendButton;
-	Player player = new Player(null, null, null);
+	Player player;
 
 	public void init() throws Exception {
 		// Runs before the start function
@@ -53,11 +53,9 @@ public class GUI extends Application implements GUIConstants {
 		mainPane.add(gridPane, 1, 0);
 		mainPane.add(StartButton(),2,0);
 		
-		
+		AddToChat(new Label("Please write your nickName!"));
 		
 		stage.setTitle("DND");
-		//stage.setWidth(WINDOW_WIDTH);
-	//	stage.setHeight(WINDOW_HEIGHT);
 		stage.setScene(mainScene);
 		stage.show();
 	
@@ -65,9 +63,6 @@ public class GUI extends Application implements GUIConstants {
 
 	public GridPane ChatPane() {
 		GridPane pane = new GridPane();
-		//pane.setMinSize(CHAT_WIDTH, CHAT_HEIGHT);
-	//	pane.setMaxSize(CHAT_WIDTH, CHAT_HEIGHT);
-	//	pane.setPrefSize(CHAT_WIDTH, CHAT_HEIGHT);
 		pane.add(chatlog, 0, 0);
 		pane.add(chatField, 0, 1);
 		pane.add(sendButton, 1, 1);
@@ -75,18 +70,12 @@ public class GUI extends Application implements GUIConstants {
 	}
 
 	public void SetUpChatlog() {
-		//chatlog.setMaxHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
-	//	chatlog.setPrefHeight(CHAT_HEIGHT - CHATBUTTON_HEIGHT);
 		for (int i = 0; i < CHAT_MAX_LOGS; i++)
 			AddToChat(new Label());
 	}
 
 	public TextField ChatField() {
 		TextField field = new TextField();
-	//	field.setMaxHeight(CHATBUTTON_HEIGHT);
-	//	field.setMinWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
-	//	field.setPrefHeight(CHATBUTTON_HEIGHT);
-	//	field.setPrefWidth(CHAT_WIDTH - CHATBUTTON_WIDTH);
 		field.setOnKeyPressed((event) -> {
 			if (event.getCode() == KeyCode.ENTER)
 				SendToChat(chatField);
@@ -107,8 +96,6 @@ public class GUI extends Application implements GUIConstants {
 	}
 	public Button SendButton() {
 		Button button = new Button("Send");
-	//	button.setMinSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
-	//	button.setPrefSize(CHATBUTTON_WIDTH, CHATBUTTON_HEIGHT);
 		button.setOnAction(action -> {
 			SendToChat(chatField);
 		});
@@ -165,8 +152,8 @@ public class GUI extends Application implements GUIConstants {
 			gridPane.getColumnConstraints().add(column);
 		}
 
-		// emojis
-		Label happy = new Label("\u2603");
+		// emojis // Is this part even needed?
+		Label happy = new Label("\u2603"); 
 		Label whisper = new Label("\ud83d\udcac");
 		Label snooping = new Label("\ud83d\udc40");
 		Label shouting = new Label("\ud83d\udce2");
@@ -175,9 +162,6 @@ public class GUI extends Application implements GUIConstants {
 		happy.setStyle("-fx-font-size:100px; ");
 
 		gridPane.add(happy, 0, 0);
-
-
-		//gridPane.add(happy, 0, 0);
 		
 
 		GridPane.setHalignment(whisper, HPos.CENTER);
@@ -198,7 +182,7 @@ public class GUI extends Application implements GUIConstants {
 					
 					try {
 						if (x >= 0 && x < columns && y >= 0 && y < rows)
-							Client.out.writeUTF("changepos " + x + " " + y);
+							Client.out.writeUTF("changepos " + x + " " + y + " " + player.GetAvatarNumber());
 					} catch (IOException ex) {} catch (NullPointerException ex) {}
 					setLocation(rows, columns, gridPane, x, y, player.GetLabel());
 				});
